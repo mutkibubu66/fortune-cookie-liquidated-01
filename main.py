@@ -43,7 +43,10 @@ def main() -> None:
         f.write(LINE + "\n")
     # Round-trip check: what the grader reads must be exactly the line.
     with open(OUTPUT_PATH, encoding="utf-8") as f:
-        assert f.read() == LINE + "\n", "entry.txt round-trip mismatch"
+        written = f.read()
+    assert written == LINE + "\n", "entry.txt round-trip mismatch"
+    assert len(written.rstrip("\n")) == len(LINE), "entry.txt length mismatch"
+    assert written.count("\n") == 1, "entry.txt must hold exactly one line"
     print(LINE)
 
 
